@@ -65,12 +65,14 @@ class PromptCache:
 
 """
  🧠 Features im Überblick
-Funktion	Wirkung
-🧠 In-Memory	Kein Disk- oder Netzwerk-Overhead – läuft super leicht auf Pi & Tower
-🔐 SHA256 Hash	Nutzt prompt content als Fingerabdruck für Cache-Key
-⏳ TTL Support	Jeder Prompt kann automatisch nach X Sekunden verfallen
-🔁 Replay-fähig	 Man kann exakt denselben Prompt wieder abrufen (z. B. für Audits)
-🧹 Cleanup-Modus	Entfernt automatisch veraltete Einträge → keine RAM-Leaks
+ 
+Funktion	            Wirkung
+
+🧠 In-Memory	        Kein Disk- oder Netzwerk-Overhead – läuft super leicht auf Pi & Tower
+🔐 SHA256 Hash	        Nutzt prompt content als Fingerabdruck für Cache-Key
+⏳ TTL Support	        Jeder Prompt kann automatisch nach X Sekunden verfallen
+🔁 Replay-fähig	        Man kann exakt denselben Prompt wieder abrufen (z. B. für Audits)
+🧹 Cleanup-Modus	    Entfernt automatisch veraltete Einträge → keine RAM-Leaks
 
 
 💾 Warum ein cache_manager.py Sinn macht
@@ -117,3 +119,4 @@ Token-Limiter (max. Y Prompts pro Session)
 """
 
 #In-Memory + optional File/Redis speichern
+
