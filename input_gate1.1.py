@@ -69,12 +69,14 @@ def authorize_input(user_input: str) -> dict:
 
 """
 🔐 Vorteile dieser Version
-Feature	Vorteil
-✅ Unicode-sicher	Keine Tarnung durch seltsame Zeichen
+
+Feature	                    Vorteil
+
+✅ Unicode-sicher	        Keine Tarnung durch seltsame Zeichen
 ✅ Regex mit Wortgrenzen	Keine false positives wie „you are not“
-⚠️ Suspicious-Level	Kann verwendet werden für Soft-Blocking / Logging
-🧱 Erweiterbar	Pattern-Listen skalierbar nach Bedrohungskategorie
-📦 Rückgabe als Dict	Ideal für Logging, Decision Trees oder Routing
+⚠️ Suspicious-Level	        Kann verwendet werden für Soft-Blocking / Logging
+🧱 Erweiterbar	            Pattern-Listen skalierbar nach Bedrohungskategorie
+📦 Rückgabe als Dict	    Ideal für Logging, Decision Trees oder Routing
 
 ⏭️ Integrationstipp
 Im Gesamtsystem könnte man authorize_input() z. B. in eine Art Input-Verarbeitungs-Pipeline einbauen:
@@ -85,4 +87,5 @@ if gate_result["status"] == "denied":
     block_and_log(gate_result)
 elif gate_result["status"] == "suspicious":
     trigger_soft_alert(gate_result)
+
 """
