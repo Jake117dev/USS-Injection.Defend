@@ -69,12 +69,14 @@ def build_prompt(system_prompt: str, user_prompt: str, clean_data: str = "") -> 
 
 """
 🚀 Vorteile
-Feature	Effekt
-🧱 Struktur-Schutz	"###" wird entschärft → kein Fake-Systemblock
-✂️ Textkürzung	Verhindert Overflow von Kontextlänge
-🔐 SHA-256-Hash	Für Audit, Logging, oder Session-Wiederherstellung
-📦 Rückgabe als Dict	Macht Weiterverarbeitung sauber & strukturiert
-📏 Meta-Daten	Zeigt, ob Inhalt gekürzt wurde
+
+Feature	                            Effekt
+
+🧱 Struktur-Schutz	                "###" wird entschärft → kein Fake-Systemblock
+✂️ Textkürzung	                    Verhindert Overflow von Kontextlänge
+🔐 SHA-256-Hash	                    Für Audit, Logging, oder Session-Wiederherstellung
+📦 Rückgabe als Dict	            Macht Weiterverarbeitung sauber & strukturiert
+📏 Meta-Daten	                    Zeigt, ob Inhalt gekürzt wurde
 
 🔁 Integrationstipp
 Im Agenten-Stack kann man damit z. B. nachvollziehen:
@@ -83,3 +85,4 @@ Welche Prompts zu welchen LLM-Antworten führten
 
 Welche Session wie oft truncated == True getriggert hat (→ evtl. Split nötig)
 """
+
