@@ -65,12 +65,14 @@ def sanitize_text(raw_text: str) -> dict:
 
 """
 💡 Vorteile
-Feature	Wirkung
-🧱 Modular aufgebaut	Einzelne Filter testbar & erweiterbar
-🧠 Auditfähig	Gibt "removed"-Liste mit Treffern zurück
-🔐 Sicheres Desinfizieren	Kein gefährliches .*/-Match mehr – Schutz vor „Überblock“
-✨ Entity-Unescaping	Wandelt &lt;script&gt; → <script> → kann entfernt werden
-📊 Strukturierte Rückgabe	Ideal für Logging, Debugging oder Decision Trees
+
+Feature	                            Wirkung
+
+🧱 Modular aufgebaut	            Einzelne Filter testbar & erweiterbar
+🧠 Auditfähig	                    Gibt "removed"-Liste mit Treffern zurück
+🔐 Sicheres Desinfizieren	        Kein gefährliches .*/-Match mehr – Schutz vor „Überblock“
+✨ Entity-Unescaping	            Wandelt &lt;script&gt; → <script> → kann entfernt werden
+📊 Strukturierte Rückgabe	        Ideal für Logging, Debugging oder Decision Trees
 
 🧪 Integrationstipp
 Verknüpfe den Sanitizer direkt im Preprocessing-Flow:
@@ -86,3 +88,4 @@ if sanitized["removed"]:
 
 forward_to_context_detector(sanitized["clean_text"])
 """
+
