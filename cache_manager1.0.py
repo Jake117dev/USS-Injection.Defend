@@ -63,63 +63,57 @@ class PromptCache:
             "expired": sum(1 for e in self._cache.values() if e.is_expired())
         }
 
+"""
+ 🧠 Features im Überblick
+Funktion	Wirkung
+🧠 In-Memory	Kein Disk- oder Netzwerk-Overhead – läuft super leicht auf Pi & Tower
+🔐 SHA256 Hash	Nutzt prompt content als Fingerabdruck für Cache-Key
+⏳ TTL Support	Jeder Prompt kann automatisch nach X Sekunden verfallen
+🔁 Replay-fähig	 Man kann exakt denselben Prompt wieder abrufen (z. B. für Audits)
+🧹 Cleanup-Modus	Entfernt automatisch veraltete Einträge → keine RAM-Leaks
 
-# 🧠 Features im Überblick
-#Funktion	Wirkung
-#🧠 In-Memory	Kein Disk- oder Netzwerk-Overhead – läuft super leicht auf Pi & Tower
-#🔐 SHA256 Hash	Nutzt prompt content als Fingerabdruck für Cache-Key
-#⏳ TTL Support	Jeder Prompt kann automatisch nach X Sekunden verfallen
-#🔁 Replay-fähig	 Man kann exakt denselben Prompt wieder abrufen (z. B. für Audits)
-#🧹 Cleanup-Modus	Entfernt automatisch veraltete Einträge → keine RAM-Leaks
 
+💾 Warum ein cache_manager.py Sinn macht
+1. Schnelle Wiederverwendung von Prompts
+Man baut dynamische Prompts – aber:
 
-#💾 Warum ein cache_manager.py Sinn macht
-#1. Schnelle Wiederverwendung von Prompts
-#Man baut dynamische Prompts – aber:
+User-Eingaben können sich ähneln
 
-#User-Eingaben können sich ähneln
+System- oder Datenkontexte wiederholen sich
+→ Caching spart dir LLM-Ressourcen & Verarbeitungszeit
 
-#System- oder Datenkontexte wiederholen sich
-#→ Caching spart dir LLM-Ressourcen & Verarbeitungszeit
+⏭️ So könnte man es nutzen:
 
-#⏭️ So könnte man es nutzen:
-#python
-#Kopieren
-#from cache_manager import PromptCache
+from cache_manager import PromptCache
 
-#cache = PromptCache()
-#hash_key = cache.store(prompt_text, ttl=600)
+cache = PromptCache()
+hash_key = cache.store(prompt_text, ttl=600)
 
-# später…
-#prompt_reloaded = cache.retrieve(hash_key)
+ später…
+prompt_reloaded = cache.retrieve(hash_key)
 
-# periodisch aufräumen
-#cache.cleanup()
+ periodisch aufräumen
+cache.cleanup()
 
-#2. RAM-isolierter Zwischenspeicher = Teil deiner Sicherheitsarchitektur:
+2. RAM-isolierter Zwischenspeicher = Teil deiner Sicherheitsarchitektur:
+„RAM/Cache – flüchtige Kontexte werden isoliert, bei Bedarf referenziert“
 
-#„RAM/Cache – flüchtige Kontexte werden isoliert, bei Bedarf referenziert“
+Das bedeutet:
+Kein dauerhafter Speicher (datenschutzfreundlich)
+Aber temporäre Referenzierbarkeit über Session-Tokens, URL, etc.
 
-#Das bedeutet:
+3. Audit & Replay-fähig
+Mit dem SHA-256-Hash aus prompt_builder.py kann man:
 
-#Kein dauerhafter Speicher (datenschutzfreundlich)
+Prompt-Versionen loggen
+später genau denselben Prompt rekonstruieren
+feststellen, ob Angreifer etwas „verändert“ haben
 
-#Aber temporäre Referenzierbarkeit über Session-Tokens, URL, etc.
+4. Modular ausbaubar
+Kann später:
+Memory-TTL einbauen (nach X Minuten wird gelöscht)
 
-#3. Audit & Replay-fähig
-#Mit dem SHA-256-Hash aus prompt_builder.py kann man:
-
-#Prompt-Versionen loggen
-
-#später genau denselben Prompt rekonstruieren
-
-#feststellen, ob Angreifer etwas „verändert“ haben
-
-#4. Modular ausbaubar
-#Kann später:
-
-#Memory-TTL einbauen (nach X Minuten wird gelöscht)
-
-#Token-Limiter (max. Y Prompts pro Session)
+Token-Limiter (max. Y Prompts pro Session)
+"""
 
 #In-Memory + optional File/Redis speichern
